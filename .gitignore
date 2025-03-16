@@ -1,3 +1,6 @@
+/assignment_2/ghidra/*
+/assignment_2/ghidra_projects/*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
