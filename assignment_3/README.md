@@ -7,6 +7,7 @@ Advanced techniques of dynamic malware analysis:
 - Bypassing anti-debugging techniques
 - API tracing
 - Network interaction analysis
+
 Files: 
 - [EICAR Test File](https://www.eicar.org/download-anti-malware-testfile/) - safe test file for antivirus experiments
 - [UPX Sample](https://github.com/HHousen/PicoCTF-2022/raw/refs/heads/master/Reverse%20Engineering/unpackme/unpackme-upx) - UPX-packed binary file / self-created UPX
@@ -34,14 +35,23 @@ Files:
     - ![img_5_2](./img/6_2.png)
 5. Analysis within Cuckoo Sandbox: https://www.cuckoo.ee/analysis/6202123/summary/
 
-### Bypassing Anti-Debugging Techniques
-
-Identify anti-debugging calls (IsDebuggerPresent, NtQueryInformationProcess).
-Modify the executable code (NOP out CheckRemoteDebuggerPresent).
-Relaunch upx_sample.exe and verify execution under the debugger.
-Result: A modified file that runs successfully under debugging conditions.
-`file unpackme-upx > file_unpackupx.txt`
-`sudo apt install binutils`, `strings unpackme-upx > strings_unpackme.txt`
-chmod +x unpackme-upx
-hexdump, objdump, ltrace / strace (sudo apt install ltrace) - strace ./unpackme-upx | tee strace_unpackmeupx.txt # TODO: need to pass all strace
-sudo apt install upx-ucl or https://github.com/upx/upx/releases/ -> tar extract tar.xz -> chmod +x upx -> ./upx -d unpackme-upx
+### Bypassing anti-debugging techniques
+1. Analysis of the file:
+  - chmod +x unpackme-upx
+  - `file unpackme-upx > file_unpackmeupx.txt`
+  - `sudo apt install binutils`, `strings unpackme-upx > strings_unpackme.txt`
+  - `hexdump -C unpackme-upx > hexdump_unpackmeupx.txt`
+  - `objdump -D unpackme-upx > objdump_unpackmeupx.txt`
+  - `sudo apt install ltrace strace`, `strace ./unpackme-upx 2>&1 | tee -a strace_unpackmeupx.txt`
+2. Unpacking file:
+  `sudo apt install upx-ucl` or https://github.com/upx/upx/releases/ -> tar extract tar.xz -> chmod +x upx -> ./upx -d unpackme-upx
+  - previous analysis from step 1
+3. Analyzed in Ghidra:
+  - disassembled code structure
+    - ![img_7](./img/7.png)
+    - ![img_8](./img/8.png)
+    - ![img_9](./img/9.png)
+    - ![img_10](./img/10.png)
+  - convert hex to decimal: python3 -> int("0xb83cb", 16) -> 754635
+  - check the flag:
+    - ![img_11](./img/11.png)
