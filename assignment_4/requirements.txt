@@ -1,0 +1,6 @@
+pyghidra
+networkx
+python-dotenv
+fastapi
+uvicorn[standard]
+matplotlib
