@@ -1,0 +1,76 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36" version="26.2.13">
+  <diagram name="Страница — 1" id="TwCK1SQBpKlTIh2n-5vS">
+    <mxGraphModel dx="1590" dy="663" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="iumePXEYjSNDbihXkMJK-25" value="" style="rounded=0;whiteSpace=wrap;html=1;container=0;" parent="1" vertex="1">
+          <mxGeometry x="-80" y="273" width="517" height="268" as="geometry" />
+        </mxCell>
+        <mxCell id="iumePXEYjSNDbihXkMJK-2" value="Debugger" style="rounded=0;whiteSpace=wrap;html=1;container=0;" parent="1" vertex="1">
+          <mxGeometry x="-40" y="310" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="iumePXEYjSNDbihXkMJK-3" value="while(TRUE)&lt;div&gt;{&lt;/div&gt;&lt;div&gt;&amp;nbsp; waitForDebugEvent();&lt;/div&gt;&lt;div&gt;&amp;nbsp; ...&lt;/div&gt;&lt;div&gt;&amp;nbsp; ContinueDebugEvent();&lt;/div&gt;&lt;div&gt;}&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;container=0;" parent="1" vertex="1">
+          <mxGeometry x="-58.5" y="392" width="157" height="102" as="geometry" />
+        </mxCell>
+        <mxCell id="iumePXEYjSNDbihXkMJK-8" value="" style="endArrow=classic;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="iumePXEYjSNDbihXkMJK-2" target="iumePXEYjSNDbihXkMJK-3" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="320" y="266" as="sourcePoint" />
+            <mxPoint x="370" y="216" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iumePXEYjSNDbihXkMJK-9" value="Process" style="rounded=0;whiteSpace=wrap;html=1;container=0;" parent="1" vertex="1">
+          <mxGeometry x="297" y="310" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="iumePXEYjSNDbihXkMJK-10" value="OS" style="rounded=0;whiteSpace=wrap;html=1;container=0;" parent="1" vertex="1">
+          <mxGeometry x="169" y="460" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="iumePXEYjSNDbihXkMJK-11" value="" style="endArrow=classic;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=none;startFill=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="103.5" y="336" as="sourcePoint" />
+            <mxPoint x="275.5000000000002" y="336.16" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iumePXEYjSNDbihXkMJK-13" value="" style="endArrow=none;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="103" y="351.34" as="sourcePoint" />
+            <mxPoint x="275.0000000000002" y="351.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iumePXEYjSNDbihXkMJK-14" value="CreateProcess / DebugActiveProcess" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;container=0;" parent="1" vertex="1">
+          <mxGeometry x="98.5" y="295" width="177" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="iumePXEYjSNDbihXkMJK-17" value="API (WinAPI)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;rotation=45;container=0;" parent="1" vertex="1">
+          <mxGeometry x="109" y="394" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="iumePXEYjSNDbihXkMJK-18" value="being debugged" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;rotation=-45;container=0;" parent="1" vertex="1">
+          <mxGeometry x="283" y="394" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="iumePXEYjSNDbihXkMJK-15" value="" style="endArrow=classic;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;startArrow=none;startFill=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="299" y="459" as="sourcePoint" />
+            <mxPoint x="372" y="386" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iumePXEYjSNDbihXkMJK-16" value="" style="endArrow=none;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;startArrow=classic;startFill=1;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="309" y="470" as="sourcePoint" />
+            <mxPoint x="383" y="397" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iumePXEYjSNDbihXkMJK-23" value="" style="endArrow=classic;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;startArrow=none;startFill=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="84" y="390" as="sourcePoint" />
+            <mxPoint x="157" y="463" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iumePXEYjSNDbihXkMJK-24" value="" style="endArrow=none;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;startArrow=classic;startFill=1;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="73" y="400" as="sourcePoint" />
+            <mxPoint x="146" y="474" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
