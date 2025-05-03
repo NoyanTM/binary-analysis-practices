@@ -49,23 +49,31 @@
      ![img_4_1](./img/4_1.png)
      ![img_4_2](./img/4_2.png)
      ![img_4_3](./img/4_3.png)
-     - Open Developer Command Prompt for VS 2017 (x86_64 or x86_32) -> `git clone -b llvm-4.0 https://github.com/obfuscator-llvm/obfuscator`, `cd obfuscator`, `mkdir build`, `cd build`, 
+     - Open Developer Command Prompt for VS 2017 (x86_64 or x86_32) -> `git clone -b llvm-4.0 https://github.com/obfuscator-llvm/obfuscator`, `cd obfuscator`, `mkdir build`, `cd build` -> `cmake -G "Visual Studio 15 2017 Win64" ..` or `cmake -DCMAKE_BUILD_TYPE=Release ..` (CMake to generate VS2017 project and then compile it minding the target architecture) -> build sln file `msbuild LLVM.sln /m:7` -> build is located in `obfuscator/build/Debug/bin` -> check clang with `clang.exe -v` or `clang -v`.
      ![img_5_1](./img/5_1.png)
      ![img_5_2](./img/5_2.png)
+     ![img_6_1](./img/6_1.png)
+     ![img_6_2](./img/6_2.png)
+     ![img_6_3](./img/6_3.png)
+     ![img_6_4](./img/6_4.png)
+     - Ways to use that tool:
+       - manually via command line.
+       - add the compiler as a custom build tool for .cpp and other files in Visual Studio (in a relevant file Property Pages).
+       - use VS Installer to install a clang-cl platform toolset and manually swap Visual Studio’s clang version with the compiled compiler.
+     - For example, compile simple `example.c`: `clang -v example.c -o example -mllvm -sub -mllvm -fla -mllvm -bcf`
+       - `-v`: debug information
+       - `-sub`: replaces arithmetic operations
+       - `-fla`: control flow flattening
+       - `-bcf`: bogus control flow
+      - cannot open /dev/random
 
 
-cmake -G "Visual Studio 15 2017 Win64" ..
+-D__CUDACC__ -D_ALLOW_COMPILER_AND_STL_VERSION_MISMATCH
+-mllvm -bcf_prob=73
+-mllvm -bcf_loop=1
+-mllvm -sub_loop=5
+-mllvm -split_num=5
+-mllvm -aesSeed=DEADBEEFDEADCODE
 
-We need to use CMake to generate VS2017 project and then compile it (minding the target architecture)
-There are different ways to use Obfuscator-LLVM compiler:
-use manually via command line
-add the compiler as a custom build tool for .cpp and other files in Visual Studio (in a relevant file Property Pages)
-use VS Installer to install a clang-cl platform toolset and manually swap Visual Studio’s clang version with the compiled compiler
 
-CMake to generate project and compiling it `clang -Xclang -load -Xclang /path/to/LLVMObfuscator.so -mllvm -sub -mllvm -fla -mllvm -bcf logic.c -o logic_obf` (-sub: replaces arithmetic operations, -fla: control flow flattening, -bcf: bogus control flow)
-- Analysis of the result: readability, Disassemble logic.exe, understanding
-clang -Xclang -load -Xclang /path/to/LLVMObfuscator.so -mllvm -sub -mllvm -fla -mllvm -bcf logic.c -o logic_obf
-Options:
--sub: replaces arithmetic operations
--fla: control flow flattening
--bcf: bogus control flow
+   - Analysis of the result: readability, disassembling logic.exe, understanding
