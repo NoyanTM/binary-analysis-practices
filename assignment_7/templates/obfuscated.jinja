@@ -1,0 +1,38 @@
+// including and applying some unused packages
+#include <stdio.h>
+
+{% for function in functions %}
+    {{ function }}
+{% endfor %}
+
+int main(void) {
+    // dead_code can be everywhere before return
+    int x = 5;
+    int y = 6;
+    int x = SUM(5, 3);
+    int X = xYz(5, 3);
+    // Use Macros - #define SUM(a,b) ((a) ^ (b) + 2 * ((a) & (b)))
+    // Logic Transformation
+    // replace simple operations with more complex equivalents
+    // still returns the sum, but uses bitwise tricks.
+    int xYz(int a, int b) {
+        int tmp = a ^ b;
+        tmp = tmp + 2 * (a & b);
+        return tmp;
+    }
+
+    // applied functions calls here
+    // generated variables to that
+    // return result which is all functions applied
+    // int result = add(5, 3);
+    {% for function in functions %}
+        {{ function }}
+    {% endfor %}
+
+    printf("Result: %d\n", result);
+    return 0;
+
+    {% for unreachable in unused_code.unreachables %}
+        {{ unreachable }}
+    {% endfor %}
+}
