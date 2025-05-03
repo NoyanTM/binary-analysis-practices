@@ -49,7 +49,7 @@
      ![img_4_1](./img/4_1.png)
      ![img_4_2](./img/4_2.png)
      ![img_4_3](./img/4_3.png)
-     - Open Developer Command Prompt for VS 2017 (x86_64 or x86_32) -> `git clone -b llvm-4.0 https://github.com/obfuscator-llvm/obfuscator`, `cd obfuscator`, `mkdir build`, `cd build` -> `cmake -G "Visual Studio 15 2017 Win64" ..` or `cmake -DCMAKE_BUILD_TYPE=Release ..` (CMake to generate VS2017 project and then compile it minding the target architecture) -> build sln file `msbuild LLVM.sln /m:7` -> build is located in `obfuscator/build/Debug/bin` -> check clang with `clang.exe -v` or `clang -v`.
+     - Open Developer Command Prompt for VS 2017 (x86_64 or x86_32) -> `git clone -b llvm-4.0 https://github.com/obfuscator-llvm/obfuscator`, `cd obfuscator`, `mkdir build`, `cd build` -> `cmake -G "Visual Studio 15 2017 Win64" ..` or `cmake -DCMAKE_BUILD_TYPE=Release ..` (CMake to generate VS2017 project and then compile it minding the target architecture) -> build sln file `msbuild LLVM.sln /m:7` -> build is located in `obfuscator/build/Debug/bin` -> check clang with `clang.exe -v` or `clang -v` or `clang-cl -v` or other libraries in build.
      ![img_5_1](./img/5_1.png)
      ![img_5_2](./img/5_2.png)
      ![img_6_1](./img/6_1.png)
@@ -62,18 +62,23 @@
        - use VS Installer to install a clang-cl platform toolset and manually swap Visual Studio’s clang version with the compiled compiler.
      - For example, compile simple `example.c`: `clang -v example.c -o example -mllvm -sub -mllvm -fla -mllvm -bcf`
        - `-v`: debug information
+       - `-mllvm`: used before any additional params
        - `-sub`: replaces arithmetic operations
        - `-fla`: control flow flattening
        - `-bcf`: bogus control flow
-      - cannot open /dev/random
-
-
--D__CUDACC__ -D_ALLOW_COMPILER_AND_STL_VERSION_MISMATCH
--mllvm -bcf_prob=73
--mllvm -bcf_loop=1
--mllvm -sub_loop=5
--mllvm -split_num=5
--mllvm -aesSeed=DEADBEEFDEADCODE
-
-
+       - additional params:
+         - -bcf_prob=N,
+         - -bcf_loop=N,
+         - -sub_loop=N,
+         - -split_num=N,
+         - -aesSeed=RANDOM_HEX_SEED (like DEADBEEFDEADCODEDEADBEEFDEADCODE, if error like `cannot open /dev/random`) ![img_6_5](./img/6_5.png)
+         - -fuse-ld=PATH_TO_LINKER (if linker not found, move to close folder or provide path to it like "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64\link.exe")
+     ![img_7_1](./img/7_1.png)
+     ![img_7_2](./img/7_2.png)
    - Analysis of the result: readability, disassembling logic.exe, understanding
+   ![img_8_1](./img/8_1.png)
+   ![img_8_2](./img/8_2.png)
+   ![img_8_3](./img/8_3.png)
+   ![img_8_4](./img/8_4.png)
+   ![img_8_5](./img/8_5.png)
+   ![img_8_6](./img/8_6.png)
