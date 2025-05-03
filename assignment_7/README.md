@@ -39,33 +39,33 @@
 
 ## Solution and practice
 1. Manual obfuscation:
-   - Provided in `/obfuscator` directory as Python scripts, but it is не жизнеспособная штука ведь нужно поддерживать разные версии С и других языков поэтому проще взять llvm (clang C/C++ compiler) - use llm to generate not applied code, not applied to complex cases, cannot change of other C file (NEED compete C CODE PARSER)
+   - Provided in `/obfuscator` directory as Python scripts, but it is not viable in practice, since it would require maintaining support for different versions of C specification, other languages, and complex cases - therefore, it is more practical to rely on LLVM (using clang c/++ compiler frontend) or even use some LLM to generate garbage code for obfuscation.
    - Start with: `python3 -m venv venv`, `source venv/bin/activate`, `pip install -r requirements.txt`, `python3 -m obfuscator.main`
    - Compile and execute: `gcc ./source/obfuscated.c -o ./build/obfuscated`, `./build/obfuscated`
-
 2. Automatic obfuscation:
-   -  
+   - Based on [ollvm / Obfuscator LLVM](https://github.com/obfuscator-llvm/obfuscator/) - automatic LLVM IR obfuscation, based on llvm-4.0 from 2017.
+     - Obfuscation works on IR level, clang is used to generate IR from source code, IR is processed to obfuscate code flow and finally the assembly is generated.
+     - It needs to be downloaded and properly compiled on Visual Studio 17, because 2019 gives errors during compilation and other environments also - sources to download: https://aka.ms/vs/15/release/vs_community.exe, https://visualstudio.microsoft.com/vs/older-downloads/, https://community.chocolatey.org/packages/VisualStudio2017Community#files, https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=15 (change 15 to others versions), etc. For example, modern ubuntu 24.04 cannot compile this version of LLVM and if not all LLVM requirements for specific version are installed (https://llvm.org/docs/GettingStarted.html#software) - there will be error with build process.
+     ![img_4_1](./img/4_1.png)
+     ![img_4_2](./img/4_2.png)
+     ![img_4_3](./img/4_3.png)
+     - Open Developer Command Prompt for VS 2017 (x86_64 or x86_32) -> `git clone -b llvm-4.0 https://github.com/obfuscator-llvm/obfuscator`, `cd obfuscator`, `mkdir build`, `cd build`, 
+     ![img_5_1](./img/5_1.png)
+     ![img_5_2](./img/5_2.png)
 
-Obfuscating toolkit (Obfuscator-LLVM — for automatic LLVM IR obfuscation)
-- Link config необязателен, только link.exe
-We will leverage Obfuscator-LLVM project which is an open-source fork of the LLVM.
-Obfuscation works on the mentioned intermediate representation (IR) level. In other words it’s a kind of ‘anti’-optimization. Clang is used to generate IR from source code, then the IR is processed to obfuscate code flow and finally the assembly is generated.
-Obfuscator-LLVM — for automatic LLVM IR obfuscation
-   - Obfuscation works on the mentioned intermediate representation (IR) level. It is a kind of anti-optimization. Clang is used to generate IR from source code, then the IR is processed to obfuscate code flow and finally the assembly is generated.
-   - Setup: use Visual Studio 17, llvm-4.0 (from 2017, the latest version of LLVM is 11.0 nowadays), https://github.com/obfuscator-llvm/obfuscator/wiki/Installation, CMake to generate project and compiling it `clang -Xclang -load -Xclang /path/to/LLVMObfuscator.so -mllvm -sub -mllvm -fla -mllvm -bcf logic.c -o logic_obf` (-sub: replaces arithmetic operations, -fla: control flow flattening, -bcf: bogus control flow)
-   - Analysis of the result: readability, Disassemble logic.exe — is it harder to understand?
+
+cmake -G "Visual Studio 15 2017 Win64" ..
+
+We need to use CMake to generate VS2017 project and then compile it (minding the target architecture)
+There are different ways to use Obfuscator-LLVM compiler:
+use manually via command line
+add the compiler as a custom build tool for .cpp and other files in Visual Studio (in a relevant file Property Pages)
+use VS Installer to install a clang-cl platform toolset and manually swap Visual Studio’s clang version with the compiled compiler
+
+CMake to generate project and compiling it `clang -Xclang -load -Xclang /path/to/LLVMObfuscator.so -mllvm -sub -mllvm -fla -mllvm -bcf logic.c -o logic_obf` (-sub: replaces arithmetic operations, -fla: control flow flattening, -bcf: bogus control flow)
+- Analysis of the result: readability, Disassemble logic.exe, understanding
 clang -Xclang -load -Xclang /path/to/LLVMObfuscator.so -mllvm -sub -mllvm -fla -mllvm -bcf logic.c -o logic_obf
 Options:
 -sub: replaces arithmetic operations
 -fla: control flow flattening
 -bcf: bogus control flow
-Visual Studio 17
-https://aka.ms/vs/15/release/vs_community.exe
-Or
-https://visualstudio.microsoft.com/vs/older-downloads/
-Create a free Dev Essentials account if required
-or
-https://community.chocolatey.org/packages/VisualStudio2017Community#files
-or 
-https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=15 (change 15 to others versions)
-or 
