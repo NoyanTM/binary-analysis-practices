@@ -1,0 +1,6 @@
+boofuzz
+setuptools
+python-dotenv
+pwntools
+ipykernel
+jupyter
